@@ -26,7 +26,24 @@ object Main {
     /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+    def balance(chars: List[Char]): Boolean = {
+      val openCounter = 0;
+      val closerCounter = 0;
+      def innerFunc(oc:Int, cc:Int, tails: List[Char]):Boolean = {
+        if(tails.isEmpty && oc == cc) return true
+        else if(tails.isEmpty && oc != cc)return false
+        var localOc = oc
+        var localcc = cc
+        if(tails.head == ('(')) localOc += 1
+        else if(tails.head == (')')) localcc += 1
+        if(localcc > localOc) return false
+        else innerFunc(localOc,localcc,tails.tail)
+      }
+
+      if(chars.isEmpty) return true
+      else return innerFunc(openCounter, closerCounter, chars)
+    }
+
 
   /**
    * Exercise 3
