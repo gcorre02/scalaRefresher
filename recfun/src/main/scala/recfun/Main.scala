@@ -48,5 +48,25 @@ object Main {
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+
+    val newcoins = coins.sortWith(_<_)
+
+    def recCount(refactorMoney: Int, newcoins: List[Int]): Int = {
+
+      //exit blocks
+      if(refactorMoney == 0) 1
+
+      else if(refactorMoney < 0) 0
+
+      else if(newcoins.isEmpty && refactorMoney>=1 ) 0
+
+      //recursion block
+      else return (
+        recCount(refactorMoney - newcoins.head, newcoins)
+          + recCount(refactorMoney, newcoins.tail)
+        )
+    }
+
+    recCount(money, newcoins)}
 }
